@@ -35,6 +35,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="/">Home</a></li>
+					<li><a href="<?php echo url(); ?>/projects">Projects</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -53,8 +54,15 @@
 			</div>
 		</div>
 	</nav>
-
+<div class="content">
+	@if (Session::has('message'))
+		<div class="flash alert-info">
+			<p>{{ Session::get('message') }}</p>
+		</div>
+	@endif
+ 
 	@yield('content')
+</div>
 
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

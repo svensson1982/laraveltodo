@@ -1,7 +1,11 @@
-<?php namespace App\Http\Controllers;
+<?php 
+namespace App\Http\Controllers;
 
+use Input;
+use Redirect;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+//use App\Http\Controllers\ProjectsController;
 
 use Illuminate\Http\Request;
 
@@ -34,7 +38,11 @@ class TasksController extends Controller {
 	 */
 	public function store(Project $project)
 	{
-                //
+                $input = Input::all();
+                $input['project_id'] = $project->id;
+                Task::create($input);
+                return Redirect::route('projects.tasks.show', $project->slug)
+                        ->with('message','Project created');
 	}
 
 	/**
@@ -67,7 +75,10 @@ class TasksController extends Controller {
 	 */
 	public function update(Project $project, Task $task)
 	{
-		//
+		$input = array_except(Input::all(), '_method');
+                $task->update($input);
+                return Redirect::route('projects.tasks.show', [$project->slug, $task->slug])
+                        ->with('message', 'Task Updated');
 	}
 
 	/**
@@ -78,7 +89,9 @@ class TasksController extends Controller {
 	 */
 	public function destroy(Project $project, Task $task)
 	{
-		//
+		$task->delete();
+                return Redirect::route('projects.show', $project->slug)
+                        ->with('message', 'Task deleted');
 	}
 
 }
