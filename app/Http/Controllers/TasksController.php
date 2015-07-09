@@ -1,11 +1,12 @@
 <?php 
 namespace App\Http\Controllers;
 
+use App\Project;
+use App\Task;
 use Input;
 use Redirect;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-//use App\Http\Controllers\ProjectsController;
 
 use Illuminate\Http\Request;
 
@@ -16,9 +17,9 @@ class TasksController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index(Project $project)
+	public function index(Project $project, Task $task)
 	{
-                return view('tasks.index', compact('project'));
+                return view('tasks.show', compact('project','task'));
 	}
 
 	/**
@@ -28,7 +29,7 @@ class TasksController extends Controller {
 	 */
 	public function create(Project $project)
 	{
-                return view('tasks.create', compact('project'));
+		return view('tasks.create', compact('project'));
 	}
 
 	/**

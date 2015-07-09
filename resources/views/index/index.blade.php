@@ -1,7 +1,9 @@
 @extends('app')
 
 @section('content')
-
+<section >
+    
+</section>
 <section>
         <div class="container">
             <div class="row">
